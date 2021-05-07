@@ -21,16 +21,16 @@ def login_view(request):
             if user is not None:
                 login(request,user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect('/')
+                return redirect('/clienthome')
             else:
                 messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
-                    template_name = "login.html",
+                    template_name = "loginclient.html",
                     context={"form":form})
-    #return render(request,'loginclient.html')
+    
 
 
 def register(request):
