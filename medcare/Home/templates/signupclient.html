@@ -14,33 +14,42 @@
 		<div class="img">
 			<img src="./../static/Login/imgs/undraw_Access_account_re_8spm.svg">
 		</div>
+		
 		<div class="login-content">
+			<div>
+				{% if messages %}
+				<ul>
+					{% for message in messages %}
+					<li>{{ message }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+			</div>
 			<form method="POST" action="">
 				{% csrf_token %}
 				
 				<img src="./../static/Login/imgs/undraw_profile_pic_ic5t.svg">
 				<h3 class="title">LET'S GET YOU ONBOARD</h3>
            		<div class="input-field">
-					
-					{{ userform.username.errors }}
 					<i class="fas fa-user"></i>
-					<input type="text" placeholder="Username" name="username" maxlength="150" required id="id_username">
+					<input placeholder="Username" type="text" name="username" maxlength="150" autofocus required id="id_username">
 							 
 							  
            		</div>
            		<div class="input-field"> 
 					<i class="fas fa-envelope"></i>
-					   {{ userform.email.errors }}
 					   <input placeholder="Email" type="email" name="email" maxlength="254" id="id_email">
            		</div>
                 <div class="input-field"> 
 					<i class="fas fa-lock"></i>
-					<input type="password" placeholder="Password" name="password" maxlength="128" required id="id_password">
-					{{ userform.password.errors }}
-					
+					<input placeholder="Password" type="password" name="password1" autocomplete="new-password" required id="id_password1">
+            	</div>
+				<div class="input-field"> 
+					<i class="fas fa-lock"></i>
+					<input placeholder="Confirm Your Password" type="password" name="password2" autocomplete="new-password" required id="id_password2">
             	</div>
 				<input type="submit" class="btn" value="Register">
-				<a href="/login">Already have an account ? Login</a>
+				<a href="/loginclient">Already have an account ? Login</a>
             </form>
         </div>
     </div>

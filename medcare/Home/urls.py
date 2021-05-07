@@ -1,9 +1,13 @@
 
 from django.urls import path
-from .views import landingpage, login, register
+from .views import landingpage, login_view, register, home
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('',landingpage,name='landingpage'),
-    path('login/',login,name='login'),
-    path('register/',register,name='register'),
+    path('loginclient/',login_view,name='login'),
+    path('registerclient/',register,name='register'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('clienthome/',home,name='clienthome'),
+   
 ]
