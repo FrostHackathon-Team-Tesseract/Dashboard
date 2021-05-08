@@ -49,26 +49,43 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                     </div>
                   </nav>
             </div>
-            
-            <div class="cards">
-                {% for query in queryset %}
-                <div class="card">
-                    <h4>{{ query.Name }}</h4>
-                    <h5>{{ query.Desgination }}</h5>
-                    <h5>{{ query.Qulaitfication }}</h5>
-                    <h5>{{ query.Hospital }}</h5>
-                    {% if query.is_online %}
-                    <form method="POST">
-                        {% csrf_token %}
-                    <button name="btn" value="{{ query.doctor_id }}">Book Appointment</button></form>
-                    {% else %}
-                    <button>Currently unavailable</button>
-                    {% endif %}
+            {% if age %}
+            <div class="form-box">
+                <div class="title">
+                    <h3>Welcome {{request.user.username}}</h3>
+                </div>
+              <form class="form-1" method="POST">
+                  {% csrf_token %}
+                  <div class="age">
+                    <input name="age" placeholder="Enter your age" />
+                  </div>
+                  <div class="gender">
+                      <h1>Select Your Gender</h1>
+                    <div> 
+                        <input style="padding-right: 1rem;" name="gender" type="radio" value="male" >Male</button>
+                        <input name="gender" type="radio" value="female">Female</button>
+                    </div>
+                 
+                  </div>
+                  <div class="btn"><button value="age" type="submit">Submit</button></div>
+              </form>
+            </div>
+            {% endif %}
+
+            {% if symptom %}
+            <form class="symptom-form" style="width: 80rem; display:flex;justify-content:center; margin-bottom:5rem;" method="POST">
+                {% csrf_token %}
+            <div class="symptom-box">
+                {% for symptom in symptoms %}
+                <div class="layout"> 
+                     <input class="in" type="radio" name="symptom" value="{{ symptom.0 }}">
+                    <label for="male">{{ symptom.1 }}</label><br>
                 </div>
                 {% endfor %}
             </div>
-            
-        </div>
+            <div  class="btn"><button value="symptom" style="background-color: white; width:20rem;" type="submit">Submit</button></div>
+           </form>
+            {% endif %}
       
 
 
@@ -131,46 +148,114 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                 padding-right: .8rem;
             }
 
-            .cards{
-                padding-left: 3rem;
-                margin-top: 4rem;
-                display: grid;
-                grid-template-columns: 2fr 2fr 2fr;
+            .form-box{
+                padding-top: 3rem;
+                margin-top: 5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background-color: white !important;
+                align-self: center;
+                align-items: center;
+                min-width: 50rem;
+            }
+
+            .title{
+                margin-bottom: 2rem;
+                font-size: 34px;
+                font-weight: bolder;
+            }
+
+            .form-1{
+                display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                align-self: center;
             }
-            
-            .card{
-                width: 24rem;
-                height: 24rem;
-                padding: 2rem 2rem;
+
+            .age{
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: white !important;
+            }
+
+            .age > input{
+                width: 20rem !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0.5rem 2.4rem;
+                outline: none;
+                border: none;
+                border-bottom: 2px solid green;
+                font-size: 20px;
+                
+            }
+
+            .gender{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-bottom: 2rem;
+                margin-top: 2rem;
+            }
+
+            .gender > h1{
                 font-size: 20px;
                 font-weight: bold;
-                border: 2px solid black;
-                border-radius: 10px;
-                margin-bottom: 3rem;
+                margin-bottom: 1rem;
+                
             }
 
-            .card > h5{
-                padding: 0.4rem 0.4rem;
-            }
+           .gender > div {
+                font-size: 18px;
+                font-weight: bold;
+                cursor: pointer;
+           }
 
-            .card > h4{
-                padding: 0.3rem 0.3rem;
-            }
+           .gender > div > input{
+               cursor: pointer;
+               margin-right: 0.3rem;
+           }
 
-            .card > form > button, .card > button{
+            .btn >  button{
                 padding: 0.6rem 0.6rem;
-                margin-top: 1rem;
+                margin-bottom: 1rem;
                 background: rgb(2,0,36);
                 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,70,121,1) 100%, rgba(0,212,255,1) 100%);
                 color: white;
                 outline: none;
                 border-radius: 8px;
+                width: 6rem;
+                margin-right: 1rem;
+                
+            }
+
+
+            .symptom-box{
+                padding: 3rem;
+                margin-top: 5rem;
+                display: grid;
+                grid-template-columns: 2fr 2fr 2fr;
+                justify-content: center;
+                background-color: white !important;
+                align-self: center;
+                align-items: center;
+                min-width: 60rem;
+                color: black !important;
+                cursor: pointer !important;
+            }
+
+            .in{
+                cursor: pointer !important;
+            }
+
+            .symptom-form{
+                display: flex;
+                flex-direction: column;
+                
             }
 
         </style>
