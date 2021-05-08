@@ -3,6 +3,7 @@ from .forms import Registrationform
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
+from .models import Doctors
 
 
 # Create your views here.
@@ -72,4 +73,8 @@ def home(request):
 
 
 def bookAppointment(request):
-    return render(request,'bookappointment.html')
+    if request.method == 'POST':
+        val = request.POST.get('btn')
+        print(val)
+    queryset = Doctors.objects.all()
+    return render(request,'bookappointment.html',{'queryset':queryset})

@@ -50,8 +50,22 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                   </nav>
             </div>
             
-            <div>
-                content
+            <div class="cards">
+                {% for query in queryset %}
+                <div class="card">
+                    <h4>{{ query.Name }}</h4>
+                    <h5>{{ query.Desgination }}</h5>
+                    <h5>{{ query.Qulaitfication }}</h5>
+                    <h5>{{ query.Hospital }}</h5>
+                    {% if query.is_online %}
+                    <form method="POST">
+                        {% csrf_token %}
+                    <button name="btn" value="{{ query.doctor_id }}">Book Appointment</button></form>
+                    {% else %}
+                    <button>Currently unavailable</button>
+                    {% endif %}
+                </div>
+                {% endfor %}
             </div>
             
         </div>
@@ -117,6 +131,47 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                 padding-right: .8rem;
             }
 
+            .cards{
+                padding-left: 3rem;
+                margin-top: 4rem;
+                display: grid;
+                grid-template-columns: 2fr 2fr 2fr;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .card{
+                width: 24rem;
+                height: 24rem;
+                padding: 2rem 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white !important;
+                font-size: 20px;
+                font-weight: bold;
+                border: 2px solid black;
+                border-radius: 10px;
+                margin-bottom: 3rem;
+            }
+
+            .card > h5{
+                padding: 0.4rem 0.4rem;
+            }
+
+            .card > h4{
+                padding: 0.3rem 0.3rem;
+            }
+
+            .card > form > button, .card > button{
+                padding: 0.6rem 0.6rem;
+                margin-top: 1rem;
+                background: rgb(2,0,36);
+                background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,70,121,1) 100%, rgba(0,212,255,1) 100%);
+                color: white;
+                outline: none;
+                border-radius: 8px;
+            }
 
         </style>
 
