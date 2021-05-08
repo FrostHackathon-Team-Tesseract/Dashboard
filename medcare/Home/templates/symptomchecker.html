@@ -67,7 +67,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                     </div>
                  
                   </div>
-                  <div class="btn"><button value="age" type="submit">Submit</button></div>
+                  <div class="btn"><button name="btn" value="age" type="submit">Submit</button></div>
               </form>
             </div>
             {% endif %}
@@ -78,17 +78,43 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
             <div class="symptom-box">
                 {% for symptom in symptoms %}
                 <div class="layout"> 
-                     <input class="in" type="radio" name="symptom" value="{{ symptom.0 }}">
+                     <input class="in" type="radio" name="symptom-id" value="{{ symptom.0 }}">
                     <label for="male">{{ symptom.1 }}</label><br>
                 </div>
                 {% endfor %}
             </div>
-            <div  class="btn"><button value="symptom" style="background-color: white; width:20rem;" type="submit">Submit</button></div>
+            <div  class="btn"><button  name="btn" value="symptom" style="background-color: white; width:20rem;" type="submit">Submit</button></div>
            </form>
             {% endif %}
       
+            {% if diagnosis %}
+            <form class="symptom-form" style="width: 80rem; display:flex;justify-content:center; margin-bottom:5rem;" method="POST">
+                {% csrf_token %}
+            <div class="dia-box">
+                {% for diagnos in diagnosis %}
+                <div class="layout"> 
+                     <h5 style="font-size: 23px; font-weight:bold; ">{{ diagnos.1 }}</h5>
+                </div>
+                {% endfor %}
+            </div>
+            <div  class="btn"><button  name="btn" value="diagnos" style="background-color: white; width:20rem;" type="submit">Know More</button></div>
+           </form>
+            {% endif %}
 
 
+            {% if issue %}
+            <form class="symptom-form" style="width: 80rem; display:flex;justify-content:center; margin-bottom:5rem;" method="GET">
+                {% csrf_token %}
+            <div class="issue-box">
+                {% for i in issue %}
+                <div class="layout"> 
+                     <h5 style="font-size: 18px; ">{{ i }}</h5>
+                </div>
+                {% endfor %}
+            </div>
+            <div  class="btn"><button onclick="window.location.href='/clienthome' " name="btn" value="diagnos" style="background-color: white; width:20rem;">New Check</button></div>
+           </form>
+            {% endif %}
 
 
        
@@ -257,6 +283,37 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                 flex-direction: column;
                 
             }
+
+            .dia-box{
+                padding: 3rem;
+                margin-top: 5rem;
+                display: flex;
+                justify-content: center;
+                justify-content: center;
+                background-color: white !important;
+                align-self: center;
+                align-items: center;
+                min-width: 60rem;
+                color: black !important;
+                cursor: pointer !important;
+            }
+
+            .issue-box{
+                margin-left: 3rem;
+                padding: 3rem;
+                margin-top: 5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                justify-content: center;
+                background-color: white !important;
+                align-self: center;
+                align-items: center;
+                min-width: 60rem;
+                color: black !important;
+                cursor: pointer !important;
+            }
+
 
         </style>
 
