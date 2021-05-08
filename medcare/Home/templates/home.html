@@ -134,6 +134,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 
         <!-- java script -->
         <script>
+          console.log('{{ context }}');
                 ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
                 let chartConfig = {
                   shapes: [{
@@ -184,7 +185,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                           items: {
                             KA: {
                               tooltip: {
-                                text: 'Karnataka has 7,000 daily coivd cases',
+                                text: 'Karnataka has {{ statewise_data.Karnataka }} total covid cases',
                                 backgroundColor: '#ff5722'
                               },
                               backgroundColor: '#ff5722',
@@ -194,7 +195,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                             },
                             MH: {
                               tooltip: {
-                                text: 'Maharashtra has  12,000 daily coivd cases',
+                                text: 'Maharashtra has  {{ statewise_data.Maharashtra }} total covid cases',
                                 backgroundColor: '#ff9800'
                               },
                               backgroundColor: '#ff9800',
@@ -204,7 +205,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                             },
                             TL: {
                               tooltip: {
-                                text: 'Telangana has  8,590 daily coivd cases',
+                                text: 'Telangana has {{ statewise_data.Telangana }} total covid cases',
                                 backgroundColor: '#00AE4D'
                               },
                               backgroundColor: '#00AE4D',
@@ -212,9 +213,9 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                                 visible: true
                               }
                             },
-                            TN: {
+                            KL: {
                               tooltip: {
-                                text: 'Tamil Nadu has 6,080 daily coivd cases',
+                                text: 'Kerala has {{ statewise_data.Kerala }} total covid cases',
                                 backgroundColor: '#00bcd4'
                               },
                               backgroundColor: '#00bcd4',
