@@ -10,7 +10,9 @@ def landingpage(request):
     return render(request,'landing.html')
 
 def login_view(request):
-    print('in login view')
+    if request.user.is_authenticated:
+        return redirect('/clienthome')
+   
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
         print(form)
@@ -52,7 +54,7 @@ def register(request):
                 messages.info(request, f"You are now logged in as {username}")
                 return redirect('/clienthome')
             else:
-                messages.error(request, 'cannot create successfully')
+                messages.error(request, 'Password Did not match')
 
     except:
         messages.error(request, 'Invalid credentials')
