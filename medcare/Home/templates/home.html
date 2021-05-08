@@ -10,7 +10,9 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-
+<!-- map cdn -->
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  
 
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -37,10 +39,13 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                           <a class="nav-link" href="#">Medical Reports</a>
                         </li>
                         <li class="nav-item active">
+                            <a class="nav-link" href="#">Symptom Checker</a>
+                          </li>
+                        <li class="nav-item active">
                             <a class="nav-link" href="#">Covid Resources</a>
                           </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Logout  <i class="fas fa-sign-out-alt"></i></a>
+                            <a class="nav-link" href="/logout">Logout  <i class="fas fa-sign-out-alt"></i></a>
                           </li>
                         
                       </ul>
@@ -48,10 +53,13 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
                     </div>
                   </nav>
             </div>
-            <div class="content-area">
-                    hey
+            <div  id="myChart" class="chart--container">
+                   
             </div>
-
+            <div>
+                content
+            </div>
+            
         </div>
       
 
@@ -105,14 +113,135 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
             .nav-item{
                 font-size: 20px;
                 font-weight: bold;
-                padding-right: 1.3rem;
+                padding-right: .8rem;
             }
 
+            .chart--container {
+                margin-top: 2rem;
+                align-items: center;
+                align-self: center;
+                display: flex;
+                justify-content: center;
+                min-height: 530px;
+                width: 80%;
+                height: 80%;
+              }
+          
+              .zc-ref {
+                display: none;
+              }
         </style>
 
         <!-- java script -->
         <script>
-
+                ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+                let chartConfig = {
+                  shapes: [{
+                      type: 'zingchart.maps',
+                      options: {
+                        bbox: [67.177, 36.494, 98.403, 6.965], 
+                        ignore: ['IND'], 
+                        name: 'world.countries',
+                        panning: false,
+                        style: {
+                          tooltip: {
+                            borderColor: '#000',
+                            borderWidth: '2px',
+                            fontSize: '18px'
+                          },
+                          controls: {
+                            visible: false
+                          },
+                          hoverState: {
+                            alpha: .28
+                          }
+                        },
+                        zooming: false
+                      }
+                    },
+                    {
+                      type: 'zingchart.maps',
+                      options: {
+                        name: 'ind',
+                        panning: false, 
+                        zooming: false,
+                        scrolling: false,
+                        style: {
+                          tooltip: {
+                            borderColor: '#000',
+                            borderWidth: '2px',
+                            fontSize: '18px'
+                          },
+                          borderColor: '#000',
+                          borderWidth: '2px',
+                          controls: {
+                            visible: false,
+            
+                          },
+                          hoverState: {
+                            alpha: .28
+                          },
+                          items: {
+                            KA: {
+                              tooltip: {
+                                text: 'Karnataka has 7,000 daily coivd cases',
+                                backgroundColor: '#ff5722'
+                              },
+                              backgroundColor: '#ff5722',
+                              label: {
+                                visible: true
+                              }
+                            },
+                            MH: {
+                              tooltip: {
+                                text: 'Maharashtra has  12,000 daily coivd cases',
+                                backgroundColor: '#ff9800'
+                              },
+                              backgroundColor: '#ff9800',
+                              label: {
+                                visible: true
+                              }
+                            },
+                            TL: {
+                              tooltip: {
+                                text: 'Telangana has  8,590 daily coivd cases',
+                                backgroundColor: '#00AE4D'
+                              },
+                              backgroundColor: '#00AE4D',
+                              label: {
+                                visible: true
+                              }
+                            },
+                            TN: {
+                              tooltip: {
+                                text: 'Tamil Nadu has 6,080 daily coivd cases',
+                                backgroundColor: '#00bcd4'
+                              },
+                              backgroundColor: '#00bcd4',
+                              label: {
+                                visible: true
+                              }
+                            }
+                          },
+                          label: { 
+                            fontSize: '15px',
+                            visible: false
+                          }
+                        },
+                        zooming: false 
+                      }
+                    }
+                  ]
+                }
+            
+                zingchart.loadModules('maps,maps-ind,maps-world-countries');
+                zingchart.render({
+                  id: 'myChart',
+                  data: chartConfig,
+                  height: '100%',
+                  width: '100%',
+                });
+             
 
         </script>
 

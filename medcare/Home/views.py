@@ -68,3 +68,8 @@ def register(request):
 
 def home(request):
     return render(request,'home.html')
+
+
+
+def bookAppointment(request):
+    return render(request,'bookappointment.html')
